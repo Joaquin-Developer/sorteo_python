@@ -25,12 +25,18 @@ def get_data(in_json=True):
 
 def to_csv(data):
     dt = datetime.datetime.now()
-    path = f"{DATA_PATH}SORTEO {dt.day}-{dt.month}-{dt.year} {dt.hour}:{dt.minute}.csv"
+    path = f"{DATA_PATH}SORTEO {dt.strftime('%d-%m-%Y %H:%M')}.csv"
 
-    print(data)
+    csv_text = ""
+    for group in data:
+        teams = " ".join(str(team) for team in group).replace(" ", ":")
+        csv_text += teams
+
+        if (data[len(data) - 1] != group):
+            csv_text += "\n"
 
     with open(path, "w") as file:
-        file.write(data)
+        file.write(csv_text)
 
 def get_random_index_from_list(max):
     return random.randint(0, max)
