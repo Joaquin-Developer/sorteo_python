@@ -26,6 +26,9 @@ def get_data(in_json=True):
 def to_csv(data):
     dt = datetime.datetime.now()
     path = f"{DATA_PATH}SORTEO {dt.day}-{dt.month}-{dt.year} {dt.hour}:{dt.minute}.csv"
+
+    print(data)
+
     with open(path, "w") as file:
         file.write(data)
 

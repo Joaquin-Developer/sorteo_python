@@ -29,3 +29,4 @@ def print_the_draw(groups_draw):
 if __name__ == "__main__":
     groups_draw = run_the_draw()
     print_the_draw(groups_draw)
+    utils.to_csv(groups_draw)
