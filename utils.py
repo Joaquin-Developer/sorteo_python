@@ -40,3 +40,6 @@ def to_csv(data):
 
 def get_random_index_from_list(max):
     return random.randint(0, max)
+
+def draw_to_json(draws_group):
+    pass
