@@ -1,5 +1,7 @@
+from json import encoder
 import os, datetime
 import random
+import json
 
 DATA_PATH = "data/"
 
@@ -41,5 +43,22 @@ def to_csv(data):
 def get_random_index_from_list(max):
     return random.randint(0, max)
 
-def draw_to_json(draws_group):
-    pass
+def get_groups_letters(groups_draw):
+    return list(map(chr, range(65, 65 + len(groups_draw))))
+
+def draw_to_json(groups_draw):
+    groups_letters = get_groups_letters(groups_draw)
+    list_to_json = []
+
+    for index, elem in enumerate(groups_draw):
+        group = {}
+        group["group"] = "GRUPO " + groups_letters[index]
+
+        for j, team in enumerate(elem):
+            group[f"team{j + 1}"] = team
+
+        list_to_json.append(group)
+
+    return json.dumps(list_to_json, ensure_ascii=False)
+
+    

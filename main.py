@@ -19,17 +19,13 @@ class Draw():
                 groups_draw[i].append(data[j][index])
                 # remove raffled team in bombo:
                 data[j].pop(index)
-        
-        [[1, 2, 3], [1, 2, 3]]
-
-
 
         return groups_draw
 
 
     @staticmethod
     def print_the_draw(groups_draw):
-        groups_letters = list(map(chr, range(65, 65 + len(groups_draw))))
+        groups_letters = utils.get_groups_letters(groups_draw)
 
         print("========================================")
         for i in range(0, len(groups_letters)):
@@ -47,10 +43,9 @@ class Draw():
 
         # si no hay sorteos hacemos uno nuevo, y luego lo retornamos:
         groups_draw = Draw.run_the_draw()
-        Draw.print_the_draw(groups_draw)
         utils.to_csv(groups_draw)
-        return groups_draw
-
+        return utils.draw_to_json(groups_draw)
+        
 
     @staticmethod
     def get_last_draw():
