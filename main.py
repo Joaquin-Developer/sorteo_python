@@ -37,9 +37,9 @@ class Draw():
 
     @staticmethod
     def main():
-        # draw = Draw.get_last_draw()
-        # if draw is not None: 
-        #     return draw
+        draw = Draw.get_last_draw()
+        if draw is not None: 
+            return draw
 
         # si no hay sorteos hacemos uno nuevo, y luego lo retornamos:
         groups_draw = Draw.run_the_draw()
