@@ -2,11 +2,15 @@ from json import encoder
 import os, datetime
 import random
 import json
+from typing import List
 
 DATA_PATH = "data/"
 
-def read_csv():
-    path = f"{DATA_PATH}teams.csv"
+
+def read_csv(path=None) -> List:
+    if path is None:
+        path = f"{DATA_PATH}teams.csv"
+
     data = []
     with open(path) as file:
         lines = file.readlines()
@@ -16,8 +20,9 @@ def read_csv():
     
     return data
 
-def get_data(in_json=True):
-    data = read_csv()
+
+def get_data(in_json=True, data_path=None) -> List:
+    data = read_csv(data_path)
     teams_data = []
 
     for elem in (data):
@@ -25,7 +30,7 @@ def get_data(in_json=True):
     return teams_data
 
 
-def to_csv(data):
+def to_csv(data) -> None:
     dt = datetime.datetime.now()
     path = f"{DATA_PATH}SORTEO {dt.strftime('%d-%m-%Y %H:%M')}.csv"
 
@@ -40,13 +45,20 @@ def to_csv(data):
     with open(path, "w") as file:
         file.write(csv_text)
 
-def get_random_index_from_list(max):
-    return random.randint(0, max)
 
-def get_groups_letters(groups_draw):
+def get_random_index_from_list(max, min=0) -> int:
+    return random.randint(min, max)
+
+
+def shuffle(list: list) -> None:
+    random.shuffle(list)
+
+
+def get_groups_letters(groups_draw) -> List:
     return list(map(chr, range(65, 65 + len(groups_draw))))
 
-def draw_to_json(groups_draw):
+
+def draw_to_json(groups_draw) -> str:
     groups_letters = get_groups_letters(groups_draw)
     list_to_json = []
 
@@ -61,4 +73,3 @@ def draw_to_json(groups_draw):
 
     return json.dumps(list_to_json, ensure_ascii=False)
 
-    
