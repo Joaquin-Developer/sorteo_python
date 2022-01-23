@@ -68,9 +68,8 @@ def draw_to_json(groups_draw) -> str:
         group["group"] = "GRUPO " + groups_letters[index]
         print(elem)
         names = [x for x in elem.split(":")]
-        print(names)
 
-        for j, team in enumerate(elem):
+        for j, team in enumerate(names):
             group[f"team{j + 1}"] = team
 
         list_to_json.append(group)
