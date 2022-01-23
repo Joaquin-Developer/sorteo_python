@@ -21,15 +21,16 @@ def generate() -> List[str]:
     utils.shuffle(index_list)
 
     bombo = []
-
-
-
-
+    for i in index_list:
+        bombo.append(data[i-1])
 
     return bombo
 
 
+def print_bombo(bombo):
+    for n in range(0, len(bombo)):
+        print(n + 1, bombo[n])
 
 
 if __name__ == "__main__":
-    generate()
+    print_bombo(generate())
