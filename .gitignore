@@ -1,4 +1,3 @@
 data/*.csv
 data/
-bombo.py
 __pycache__
