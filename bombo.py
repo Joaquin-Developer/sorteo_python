@@ -22,7 +22,7 @@ def generate() -> List[str]:
 
     bombo = []
 
-    
+
 
 
 
@@ -33,5 +33,3 @@ def generate() -> List[str]:
 
 if __name__ == "__main__":
     generate()
-    # print(utils.get_random_index_from_list(20))
-    print(teams_index)
