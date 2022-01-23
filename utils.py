@@ -34,9 +34,10 @@ def to_csv(data) -> None:
     dt = datetime.datetime.now()
     path = f"{DATA_PATH}SORTEO {dt.strftime('%d-%m-%Y %H:%M')}.csv"
 
+    print(data)
     csv_text = ""
     for group in data:
-        teams = " ".join(str(team) for team in group).replace(" ", ":")
+        teams = ":".join(str(team) for team in group)
         csv_text += teams
 
         if (data[len(data) - 1] != group):
@@ -65,6 +66,9 @@ def draw_to_json(groups_draw) -> str:
     for index, elem in enumerate(groups_draw):
         group = {}
         group["group"] = "GRUPO " + groups_letters[index]
+        print(elem)
+        names = [x for x in elem.split(":")]
+        print(names)
 
         for j, team in enumerate(elem):
             group[f"team{j + 1}"] = team
