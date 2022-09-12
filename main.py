@@ -1,6 +1,5 @@
 import subprocess
-from datetime import datetime
-import utils as utils
+import logic.utils as utils
 
 
 class Draw():
@@ -35,17 +34,19 @@ class Draw():
 
     @staticmethod
     def get_last_draw():
-        """
-        obtenemos el último sorteo
-        Lo retornamos en formato json
-        """
+        """Get last draw in json format"""
+
         def get_name_of_last_draw():
-            command = subprocess.run(["ls", "-lat", "data/"], 
-                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            
+
+            command = subprocess.run(
+                ["ls", "-lat", "data/"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
+
             lines = str(command.stdout, "UTF-8").split("\n")
             filenames = list(filter(lambda x: "SORTEO" in x, lines))
-            
+
             # si no hay archivos, es porque no hay sorteos.
             if len(filenames) == 0:
                 return None
@@ -55,7 +56,7 @@ class Draw():
             args = name_last_draw.split(" ")
             # created_at = " ".join(args[10:]).replace(".csv", "")
             # created_at = datetime.strptime(created_at, "%d-%m-%Y %H:%M")
-            return " ".join(args[9:])
+            return " ".join(args[10:])
 
         filename = get_name_of_last_draw()
         if filename is None:
@@ -79,8 +80,8 @@ class Draw():
 
 
 if __name__ == "__main__":
-    Draw.main()
+    # Draw.main()
 
-    # groups_draw = run_the_draw()
-    # print_the_draw(groups_draw)
-    # utils.to_csv(groups_draw)
+    groups_draw = Draw.run_the_draw()
+    Draw.print_the_draw(groups_draw)
+    utils.to_csv(groups_draw)

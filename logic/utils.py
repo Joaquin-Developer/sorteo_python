@@ -1,13 +1,15 @@
-from json import encoder
-import os, datetime
+"""utils module"""
+
 import random
+import datetime
 import json
-from typing import List
+from typing import List, Dict
 
 DATA_PATH = "data/"
 
 
 def read_csv(path=None) -> List:
+    """Read the CSV file"""
     if path is None:
         path = f"{DATA_PATH}teams.csv"
 
@@ -17,22 +19,24 @@ def read_csv(path=None) -> List:
 
     for line in lines:
         data.append(line.replace("\n", ""))
-    
+
     return data
 
 
-def get_data(in_json=True, data_path=None) -> List:
+def get_data(data_path=None) -> List:
+    """Get the data from CSV"""
     data = read_csv(data_path)
     teams_data = []
 
-    for elem in (data):
+    for elem in data:
         teams_data.append(elem.split(":"))
     return teams_data
 
 
 def to_csv(data) -> None:
-    dt = datetime.datetime.now()
-    path = f"{DATA_PATH}SORTEO {dt.strftime('%d-%m-%Y %H:%M')}.csv"
+    """Convert the data to CSV format and write .csv file"""
+    today = datetime.datetime.now()
+    path = f"{DATA_PATH}SORTEO {today.strftime('%d-%m-%Y %H:%M')}.csv"
 
     print(data)
     csv_text = ""
@@ -40,7 +44,7 @@ def to_csv(data) -> None:
         teams = ":".join(str(team) for team in group)
         csv_text += teams
 
-        if (data[len(data) - 1] != group):
+        if data[len(data) - 1] != group:
             csv_text += "\n"
 
     with open(path, "w") as file:
@@ -51,7 +55,7 @@ def get_random_index_from_list(max, min=0) -> int:
     return random.randint(min, max)
 
 
-def shuffle(list: list) -> None:
+def shuffle(list: List) -> None:
     random.shuffle(list)
 
 
@@ -59,7 +63,7 @@ def get_groups_letters(groups_draw) -> List:
     return list(map(chr, range(65, 65 + len(groups_draw))))
 
 
-def draw_to_json(groups_draw) -> str:
+def draw_to_json(groups_draw: Dict[str, str]) -> str:
     groups_letters = get_groups_letters(groups_draw)
     list_to_json = []
 
@@ -75,4 +79,3 @@ def draw_to_json(groups_draw) -> str:
         list_to_json.append(group)
 
     return json.dumps(list_to_json, ensure_ascii=False)
-
