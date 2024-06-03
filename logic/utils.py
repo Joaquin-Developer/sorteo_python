@@ -3,14 +3,14 @@
 import random
 import datetime
 import json
-from typing import List, Dict
+from typing import List, Dict, Any
 
 DATA_PATH = "data/"
 
 
-def read_csv(path=None) -> List:
+def read_csv(path: str = None) -> List[str]:
     """Read the CSV file"""
-    if path is None:
+    if not path:
         path = f"{DATA_PATH}teams.csv"
 
     data = []
@@ -23,7 +23,7 @@ def read_csv(path=None) -> List:
     return data
 
 
-def get_data(data_path=None) -> List:
+def get_data(data_path: str = None) -> List[str]:
     """Get the data from CSV"""
     data = read_csv(data_path)
     teams_data = []
@@ -55,11 +55,11 @@ def get_random_index_from_list(max, min=0) -> int:
     return random.randint(min, max)
 
 
-def shuffle(list: List) -> None:
+def shuffle(list: List[Any]) -> None:
     random.shuffle(list)
 
 
-def get_groups_letters(groups_draw) -> List:
+def get_groups_letters(groups_draw) -> List[str]:
     return list(map(chr, range(65, 65 + len(groups_draw))))
 
 

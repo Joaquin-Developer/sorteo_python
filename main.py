@@ -3,8 +3,6 @@ import logic.utils as utils
 
 
 class Draw():
-    """draw class"""
-
     @staticmethod
     def run_the_draw():
         data = utils.get_data()
@@ -19,7 +17,6 @@ class Draw():
                 data[j].pop(index)
 
         return groups_draw
-
 
     @staticmethod
     def print_the_draw(groups_draw):
@@ -59,7 +56,7 @@ class Draw():
             return " ".join(args[10:])
 
         filename = get_name_of_last_draw()
-        if filename is None:
+        if not filename:
             return None
 
         path = utils.DATA_PATH + filename
@@ -68,9 +65,8 @@ class Draw():
     @staticmethod
     def main():
         """Return json of Draw"""
-
         draw = Draw.get_last_draw()
-        if draw is not None:
+        if draw:
             return draw
 
         # si no hay sorteos, generamos uno:
