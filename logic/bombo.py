@@ -1,5 +1,6 @@
 from typing import List
-import logic.utils as utils
+
+import utils
 
 """
 Script para el sorteo de los bombos

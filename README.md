@@ -18,11 +18,16 @@ En este caso, se definen 4 bombos con 8 equipos c/u. Lo cual generará 8 grupos 
 Se puede variar la cantidad de bombos y/o equipos por bombo.  
 Por ejemplo, si se crean 4 bombos de 3 equipos c/u, se definirán 3 grupos de 4 equipos.
 
-Ejecutar:
-```bash
-./bombo.sh
-```
 
 ### API
 La API ejecuta el sorteo (en caso de existir sorteos generados en `data/` devuelve dicho sorteo)
 Retorna un JSON con la información.
+
+
+### Sorteo para los bombos:
+
+Ejecutar:
+```bash
+./bombo.sh
+```
+Previamente definir los nombres de los equipos en `data/all_teams.csv`
