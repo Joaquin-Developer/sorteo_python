@@ -1,3 +1,3 @@
 #!/bin/bash
 clear
-python3 logic/bombo.py
+python3.10 logic/bombo.py
