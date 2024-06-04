@@ -37,8 +37,10 @@ def run_by_metadata():
 
     req = request.json()
     logging.info(req)
+    metadata_info = req
+    groups_draw = Draw.main(True, True, None, metadata_info)
 
-    return jsonify({"ok": True}), 200
+    return jsonify(groups_draw), 200
 
 
 if __name__ == "__main__":
