@@ -64,11 +64,11 @@ class Draw:
         )
 
         lines = str(command.stdout, "UTF-8").split("\n")
-        filenames = list(filter(lambda x: "SORTEO" in x, lines))
+        filenames = list(filter(lambda x: ".json" in x and "SORTEO" in x, lines))
 
         # si no hay archivos, es porque no hay sorteos.
         if len(filenames) == 0:
-            return None
+            raise utils.DrawNotFoundException()
 
         # el primer elemento es el ultimo sorteo:
         name_last_draw = filenames[0]

@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS  # , cross_origin
 
 from main import Draw
+from logic.utils import DrawNotFoundException
 
 
 ENV = os.getenv("environment") or "prod"
@@ -27,7 +28,10 @@ def index():
 
 @app.get("/api/v1/get_last_draw")
 def get_last_draw():
-    return Draw.main()
+    try:
+        return Draw.main()
+    except DrawNotFoundException:
+        return jsonify({"message": "No historical information found"}), 404
 
 
 @app.post("/api/v1/run_draw_by_metadata")

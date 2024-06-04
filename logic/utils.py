@@ -23,3 +23,7 @@ def read_json(path: str) -> Dict[str, Any]:
 def save_json(data: Any, path: str):
     with open(path, "w", encoding="utf-8") as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
+
+
+class DrawNotFoundException(Exception):
+    """Draw not found"""
