@@ -1,4 +1,4 @@
-# Sorteo Python
+# Generador sorteos
 
 App para generar un sorteo entre equipos de un bombo. 
 
