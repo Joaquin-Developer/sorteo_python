@@ -8,7 +8,7 @@ Antes de correr el script, se debe agregar la metadata necesaria.
 
 Agregar los datos en data/teams_metadata.json (crear el archivo en caso de no existir)  
 Ejemplo:
-```json
+```js
 {
     "teams": [ /* lista de Strings con los equipos */ ],
     "metadata": {
