@@ -1,4 +1,4 @@
 #!/bin/bash
 
-export environment="prod"
+export environment="test"
 python3.10 api.py
