@@ -1,3 +1,6 @@
 .vscode/
 data/SORTEO*.*
+data/bombo.json
 __pycache__
+tests/*.sh
+tests/*.json

@@ -36,10 +36,11 @@ def get_last_draw():
 
 @app.post("/api/v1/run_draw_by_metadata")
 def run_by_metadata():
-    if not request.json:
+    if not request.get_json():
+        logging.info("Invalid JSON input")
         return jsonify({"error": "Invalid input"}), 400
 
-    req = request.json()
+    req = request.get_json()
     logging.info(req)
     metadata_info = req
     groups_draw = Draw.main(True, True, None, metadata_info)
