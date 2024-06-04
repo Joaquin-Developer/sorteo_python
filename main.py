@@ -1,6 +1,5 @@
 import subprocess
 import argparse
-import json
 import random
 from datetime import datetime
 from typing import List, Dict, Any
@@ -54,14 +53,6 @@ class Draw:
             print("========================================")
 
     @classmethod
-    def print_the_draw(cls, groups_draw):
-        """
-        Warning: Deprecated method! use Draw.print_result()
-        """
-        # return cls.print_result(groups_draw)
-        print(groups_draw)
-
-    @classmethod
     def get_last_draw(cls) -> Dict[str, Dict[str, str]]:
         """Get last draw in json format"""
         print("- Get last Draw")
@@ -97,7 +88,7 @@ class Draw:
 
         bombos = []
         max_teams = len(cls.all_teams_metadata)
-        
+
         if cls.cant_bombos * cls.cant_teams_x_bombo != max_teams:
             raise ValueError("La cantidad de equipos no coincide con la distribución de bombos")
 
@@ -128,10 +119,7 @@ class Draw:
     def load_metadata(cls):
         if not cls.metadata:
             path = cls.metadata_path or "data/teams_metadata.json"
-
-            with open(path) as file:
-                lines = file.read()
-            cls.metadata = json.loads(lines)
+            cls.metadata = utils.read_json(path)
 
         cls.all_teams_metadata = cls.metadata["teams"]
         cls.cant_bombos = cls.metadata["metadata"]["cant_bombos"]
@@ -144,15 +132,9 @@ class Draw:
         if cls.generate_new_bombo:
             cls.generate_bombo()
 
-        groups_draw = None
-
-        if not cls.generate_new_sorteo:
-            groups_draw = cls.get_last_draw()
-
-        if groups_draw:
-            return groups_draw
-
-        return cls.generate()
+        if cls.generate_new_sorteo:
+            return cls.generate()
+        return cls.get_last_draw()
 
     @classmethod
     def main(
